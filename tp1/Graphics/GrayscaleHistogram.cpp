@@ -1,5 +1,6 @@
 #include "GrayscaleHistogram.h"
 #include "GrayscaleImage.h"
+#include "Graphics.h"
 
 #include <cmath>
 #include <fstream>
@@ -7,13 +8,17 @@
 namespace Graphics
 {
 
+GrayscaleHistogram::GrayscaleHistogram()
+{
+    reset(COLOR_CHANNEL_DEPTH);
+}
 GrayscaleHistogram::GrayscaleHistogram(const GrayscaleImage& grayImg)
 {
     update(grayImg);
 }
 GrayscaleHistogram::GrayscaleHistogram(const std::string &filePath)
 {
-    reset((int)pow(2, 8));
+    reset(COLOR_CHANNEL_DEPTH);
     load(filePath);
 }
 

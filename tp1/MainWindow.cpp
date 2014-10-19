@@ -1,9 +1,5 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-
-#include <QFileDialog>
-#include <QPixmap>
-
 #include "Graphics/GrayscaleImageFactory.h"
 #include "Graphics/GrayscaleImage.h"
 #include "Graphics/GrayscaleHistogram.h"
@@ -11,6 +7,12 @@
 #include "Graphics/NegatingMatchingFunction.h"
 #include "Graphics/CroppingMatchingFunction.h"
 #include "Graphics/GrayscaleCumulativeHistogram.h"
+#include "Graphics/GrayscaleConstantHistogram.h"
+#include "Graphics/GrayscaleLinearHistogram.h"
+#include "Graphics/GrayscaleSquaredRootHistogram.h"
+
+#include <QFileDialog>
+#include <QPixmap>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -78,16 +80,6 @@ void MainWindow::on_actionSaveHistogram_triggered()
         imgHistogram.save(savePath.toUtf8().data());
     }
 }
-void MainWindow::on_actionLoadHistogram_triggered()
-{
-//    QFileDialog fd(this, tr("Charger un histogramme"));
-//    fd.setFileMode(QFileDialog::ExistingFile);
-
-//    if (fd.exec())
-//    {
-//        Graphics::GrayscaleHistogram histogram(fd.selectedFiles().first().toUtf8().data());
-//    }
-}
 
 void MainWindow::on_actionApplyNegatingMatchingFunction_triggered()
 {
@@ -116,4 +108,41 @@ void MainWindow::on_actionSaveCumulativeHistogram_triggered()
         Graphics::GrayscaleCumulativeHistogram gch(gh);
         gch.save(savePath.toUtf8().data());
     }
+}
+
+void MainWindow::on_actionGetConstantHistogram_triggered()
+{
+    if (_pImage == 0)
+        return;
+
+    Graphics::GrayscaleHistogram sourceHisto(*_pImage);
+    Graphics::GrayscaleConstantHistogram constantHisto;
+
+    Graphics::MatchingFunction matchingFunc(sourceHisto, constantHisto);
+
+    setImage(matchingFunc.apply(_pImage));
+}
+void MainWindow::on_actionGetLinearHistogram_triggered()
+{
+    if (_pImage == 0)
+        return;
+
+    Graphics::GrayscaleHistogram sourceHisto(*_pImage);
+    Graphics::GrayscaleLinearHistogram linearHisto;
+
+    Graphics::MatchingFunction matchingFunc(sourceHisto, linearHisto);
+
+    setImage(matchingFunc.apply(_pImage));
+}
+void MainWindow::on_actionGetSquaredRootHistogram_triggered()
+{
+    if (_pImage == 0)
+        return;
+
+    Graphics::GrayscaleHistogram sourceHisto(*_pImage);
+    Graphics::GrayscaleSquaredRootHistogram sqrtHisto;
+
+    Graphics::MatchingFunction matchingFunc(sourceHisto, sqrtHisto);
+
+    setImage(matchingFunc.apply(_pImage));
 }

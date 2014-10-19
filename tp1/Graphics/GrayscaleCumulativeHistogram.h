@@ -19,6 +19,8 @@ public:
 
     GrayscaleCumulativeHistogram(const GrayscaleHistogram& sourceHisto);
 
+    const std::vector<double>& intensityCumulativeProbabilities() const { return _intensityCumulativeProbabilities; }
+
     void save(const std::string &path);
 
 private:

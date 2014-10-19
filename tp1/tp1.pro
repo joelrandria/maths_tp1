@@ -21,7 +21,10 @@ SOURCES += main.cpp\
     Graphics/MatchingFunction.cpp \
     Graphics/GrayscaleCumulativeHistogram.cpp \
     Graphics/NegatingMatchingFunction.cpp \
-    Graphics/CroppingMatchingFunction.cpp
+    Graphics/CroppingMatchingFunction.cpp \
+    Graphics/GrayscaleConstantHistogram.cpp \
+    Graphics/GrayscaleLinearHistogram.cpp \
+    Graphics/GrayscaleSquaredRootHistogram.cpp
 
 HEADERS  += MainWindow.h \
     Graphics/GrayscaleImage.h \
@@ -31,6 +34,10 @@ HEADERS  += MainWindow.h \
     Graphics/MatchingFunction.h \
     Graphics/GrayscaleCumulativeHistogram.h \
     Graphics/NegatingMatchingFunction.h \
-    Graphics/CroppingMatchingFunction.h
+    Graphics/CroppingMatchingFunction.h \
+    Graphics/GrayscaleConstantHistogram.h \
+    Graphics/Graphics.h \
+    Graphics/GrayscaleLinearHistogram.h \
+    Graphics/GrayscaleSquaredRootHistogram.h
 
 FORMS    += MainWindow.ui

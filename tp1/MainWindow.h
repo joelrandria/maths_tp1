@@ -28,12 +28,15 @@ private slots:
     void on_actionOuvrir_triggered();
 
     void on_actionSaveHistogram_triggered();
-    void on_actionLoadHistogram_triggered();
 
     void on_actionApplyNegatingMatchingFunction_triggered();
     void on_actionApplyCroppingMatchingFunction_triggered();
 
     void on_actionSaveCumulativeHistogram_triggered();
+
+    void on_actionGetConstantHistogram_triggered();
+    void on_actionGetLinearHistogram_triggered();
+    void on_actionGetSquaredRootHistogram_triggered();
 
 private:
     

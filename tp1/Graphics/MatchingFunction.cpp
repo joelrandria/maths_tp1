@@ -1,5 +1,7 @@
 #include "MatchingFunction.h"
 #include "GrayscaleImage.h"
+#include "GrayscaleCumulativeHistogram.h"
+#include "Graphics.h"
 
 #include <fstream>
 
@@ -8,10 +10,7 @@ namespace Graphics
 
 MatchingFunction::MatchingFunction()
 {
-    _intensityMatchings.resize(INTENSITY_VALUE_COUNT);
-
-    for (int i = 0; i < INTENSITY_VALUE_COUNT; ++i)
-        _intensityMatchings[i] = 0;
+    reset(COLOR_CHANNEL_DEPTH);
 }
 MatchingFunction::MatchingFunction(const std::string &path)
 {
@@ -19,7 +18,7 @@ MatchingFunction::MatchingFunction(const std::string &path)
     int originalValue;
     std::ifstream ifs;
 
-    _intensityMatchings.resize(INTENSITY_VALUE_COUNT);
+    reset(COLOR_CHANNEL_DEPTH);
 
     ifs.open(path.c_str(), std::ifstream::in);
 
@@ -33,6 +32,28 @@ MatchingFunction::MatchingFunction(const std::string &path)
 
     ifs.close();
 }
+MatchingFunction::MatchingFunction(const GrayscaleHistogram &sourceHisto, const GrayscaleHistogram &targetHisto)
+{
+    reset(COLOR_CHANNEL_DEPTH);
+
+    int sourceHistoSize = sourceHisto.intensityProbabilities().size();
+    int targetHistoSize = targetHisto.intensityProbabilities().size();
+
+    const std::vector<double> sourceCHisto = GrayscaleCumulativeHistogram(sourceHisto).intensityCumulativeProbabilities();
+    const std::vector<double> targetCHisto = GrayscaleCumulativeHistogram(targetHisto).intensityCumulativeProbabilities();
+
+    int x = 0;
+    int y = 0;
+    while ((y < targetHistoSize) && (x < sourceHistoSize))
+    {
+        while ((x < sourceHistoSize) && (sourceCHisto[x] < targetCHisto[y]))
+        {
+            _intensityMatchings[x] = y;
+            ++x;
+        }
+        ++y;
+    }
+}
 
 GrayscaleImage* MatchingFunction::apply(GrayscaleImage* image)
 {
@@ -45,6 +66,14 @@ GrayscaleImage* MatchingFunction::apply(GrayscaleImage* image)
             resultImage->setIntensityAt(x, y, _intensityMatchings[resultImage->getIntensityAt(x, y)]);
 
     return (resultImage);
+}
+
+void MatchingFunction::reset(int size)
+{
+    _intensityMatchings.resize(size);
+
+    for (int i = 0; i < size; ++i)
+        _intensityMatchings[i] = 0;
 }
 
 }

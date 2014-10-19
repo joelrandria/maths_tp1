@@ -47,17 +47,25 @@
     </property>
     <widget class="QMenu" name="menuFonction_de_correspondance">
      <property name="title">
-      <string>Fonction de correspondance</string>
+      <string>Appliquer une fonction de correspondance</string>
      </property>
      <addaction name="actionApplyNegatingMatchingFunction"/>
      <addaction name="actionApplyCroppingMatchingFunction"/>
     </widget>
+    <widget class="QMenu" name="menuSp_cification_d_histogramme_cible">
+     <property name="title">
+      <string>Spécifier un histogramme cible</string>
+     </property>
+     <addaction name="actionGetConstantHistogram"/>
+     <addaction name="actionGetLinearHistogram"/>
+     <addaction name="actionGetSquaredRootHistogram"/>
+    </widget>
     <addaction name="actionSaveHistogram"/>
-    <addaction name="actionLoadHistogram"/>
     <addaction name="separator"/>
     <addaction name="menuFonction_de_correspondance"/>
     <addaction name="separator"/>
     <addaction name="actionSaveCumulativeHistogram"/>
+    <addaction name="menuSp_cification_d_histogramme_cible"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuTraitements"/>
@@ -98,12 +106,32 @@
   </action>
   <action name="actionApplyNegatingMatchingFunction">
    <property name="text">
-    <string>Négatif</string>
+    <string>Négativisation</string>
    </property>
   </action>
   <action name="actionApplyCroppingMatchingFunction">
    <property name="text">
     <string>Recadrage</string>
+   </property>
+  </action>
+  <action name="actionGetConstantHistogram">
+   <property name="text">
+    <string>Histogramme constant</string>
+   </property>
+  </action>
+  <action name="actionGetLinearHistogram">
+   <property name="text">
+    <string>Histogramme linéaire</string>
+   </property>
+  </action>
+  <action name="actionGetQuadraticHistogram">
+   <property name="text">
+    <string>Histogramme quadratique</string>
+   </property>
+  </action>
+  <action name="actionGetSquaredRootHistogram">
+   <property name="text">
+    <string>Histogramme racine</string>
    </property>
   </action>
  </widget>

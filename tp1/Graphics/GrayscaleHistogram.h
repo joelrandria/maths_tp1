@@ -11,12 +11,13 @@ class GrayscaleImage;
 
 class GrayscaleHistogram
 {
-private:
+protected:
 
     std::vector<double> _intensityProbabilities;
 
 public:
 
+    GrayscaleHistogram();
     GrayscaleHistogram(const GrayscaleImage& grayImg);
     GrayscaleHistogram(const std::string& filePath);
 

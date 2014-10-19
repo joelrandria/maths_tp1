@@ -34,7 +34,7 @@ void GrayscaleCumulativeHistogram::reset(int size)
 void GrayscaleCumulativeHistogram::update(const GrayscaleHistogram &sourceHisto)
 {
     int sourceHistoSize;
-    unsigned long currentSum;
+    double currentSum;
     std::vector<double> sourceHistoValues = sourceHisto.intensityProbabilities();
 
     currentSum = 0;
