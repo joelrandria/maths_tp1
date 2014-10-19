@@ -8,6 +8,7 @@
 #include "Graphics/GrayscaleImage.h"
 #include "Graphics/GrayscaleHistogram.h"
 #include "Graphics/MatchingFunction.h"
+#include "Graphics/GrayscaleCumulativeHistogram.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -95,5 +96,19 @@ void MainWindow::on_actionApplyMatchingFunction_triggered()
     {
         Graphics::MatchingFunction matchFunc(fd.selectedFiles().first().toUtf8().data());
         setImage(matchFunc.apply(_pImage));
+    }
+}
+
+void MainWindow::on_actionSaveCumulativeHistogram_triggered()
+{
+    if (_pImage == 0)
+        return;
+
+    QString savePath = QFileDialog::getSaveFileName(0, tr("Sauvegarde de l'histogramme cumulé sur disque"), QString());
+    if (!savePath.isEmpty())
+    {
+        Graphics::GrayscaleHistogram gh(*_pImage);
+        Graphics::GrayscaleCumulativeHistogram gch(gh);
+        gch.save(savePath.toUtf8().data());
     }
 }

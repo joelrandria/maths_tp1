@@ -32,6 +32,8 @@ private slots:
 
     void on_actionApplyMatchingFunction_triggered();
 
+    void on_actionSaveCumulativeHistogram_triggered();
+
 private:
     
     Ui::MainWindow *ui;

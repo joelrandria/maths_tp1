@@ -4,6 +4,7 @@
 #include "GrayscaleHistogram.h"
 
 #include <vector>
+#include <string>
 
 namespace Graphics
 {
@@ -17,6 +18,8 @@ private:
 public:
 
     GrayscaleCumulativeHistogram(const GrayscaleHistogram& sourceHisto);
+
+    void save(const std::string &path);
 
 private:
 

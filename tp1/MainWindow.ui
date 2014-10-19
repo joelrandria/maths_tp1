@@ -48,6 +48,8 @@
     <addaction name="actionSaveHistogram"/>
     <addaction name="actionLoadHistogram"/>
     <addaction name="actionApplyMatchingFunction"/>
+    <addaction name="separator"/>
+    <addaction name="actionSaveCumulativeHistogram"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuTraitements"/>
@@ -79,6 +81,11 @@
   <action name="actionApplyMatchingFunction">
    <property name="text">
     <string>Appliquer une fonction de correspondance...</string>
+   </property>
+  </action>
+  <action name="actionSaveCumulativeHistogram">
+   <property name="text">
+    <string>Sauvegarder l'histogramme cumulé...</string>
    </property>
   </action>
  </widget>
