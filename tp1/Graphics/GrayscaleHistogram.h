@@ -13,14 +13,14 @@ class GrayscaleHistogram
 {
 private:
 
-    std::vector<unsigned long> _pixelValueCount;
+    std::vector<double> _intensityProbabilities;
 
 public:
 
     GrayscaleHistogram(const GrayscaleImage& grayImg);
     GrayscaleHistogram(const std::string& filePath);
 
-    const std::vector<unsigned long>& pixelValues() const { return _pixelValueCount; }
+    const std::vector<double>& intensityProbabilities() const { return _intensityProbabilities; }
 
     void load(const std::string &path);
     void save(const std::string &path);

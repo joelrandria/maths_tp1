@@ -15,27 +15,27 @@ void GrayscaleCumulativeHistogram::save(const std::string &path)
     int valueCount;
     std::ofstream ofs;
 
-    valueCount =_pixelValueCount.size();
+    valueCount =_intensityCumulativeProbabilities.size();
     ofs.open(path.c_str(),std::ofstream::out);
 
     for (int i = 0; i < valueCount; ++i)
-        ofs << i << "\t" << _pixelValueCount[i] << std::endl;
+        ofs << i << "\t" << _intensityCumulativeProbabilities[i] << std::endl;
 
     ofs.close();
 }
 
 void GrayscaleCumulativeHistogram::reset(int size)
 {
-    _pixelValueCount.resize(size);
+    _intensityCumulativeProbabilities.resize(size);
 
     for (int i = 0; i < size; ++i)
-        _pixelValueCount[i] = 0;
+        _intensityCumulativeProbabilities[i] = 0;
 }
 void GrayscaleCumulativeHistogram::update(const GrayscaleHistogram &sourceHisto)
 {
     int sourceHistoSize;
     unsigned long currentSum;
-    std::vector<unsigned long> sourceHistoValues = sourceHisto.pixelValues();
+    std::vector<double> sourceHistoValues = sourceHisto.intensityProbabilities();
 
     currentSum = 0;
     sourceHistoSize = sourceHistoValues.size();
@@ -45,7 +45,7 @@ void GrayscaleCumulativeHistogram::update(const GrayscaleHistogram &sourceHisto)
     for (int i = 0; i < sourceHistoSize; ++i)
     {
         currentSum += sourceHistoValues[i];
-        _pixelValueCount[i] = currentSum;
+        _intensityCumulativeProbabilities[i] = currentSum;
     }
 }
 

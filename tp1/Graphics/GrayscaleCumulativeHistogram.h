@@ -13,7 +13,7 @@ class GrayscaleCumulativeHistogram
 {
 private:
 
-    std::vector<unsigned long> _pixelValueCount;
+    std::vector<double> _intensityCumulativeProbabilities;
 
 public:
 

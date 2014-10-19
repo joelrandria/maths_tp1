@@ -30,7 +30,7 @@ void GrayscaleHistogram::load(const std::string &path)
         ifs >> intensity;
         ifs >> count;
 
-        _pixelValueCount[intensity] = count;
+        _intensityProbabilities[intensity] = count;
     }
 
     ifs.close();
@@ -40,32 +40,37 @@ void GrayscaleHistogram::save(const std::string &path)
     int valueCount;
     std::ofstream ofs;
 
-    valueCount =_pixelValueCount.size();
+    valueCount =_intensityProbabilities.size();
     ofs.open(path.c_str(),std::ofstream::out);
 
     for (int i = 0; i < valueCount; ++i)
-        ofs << i << "\t" << _pixelValueCount[i] << std::endl;
+        ofs << i << "\t" << _intensityProbabilities[i] << std::endl;
 
     ofs.close();
 }
 
 void GrayscaleHistogram::reset(int size)
 {
-    _pixelValueCount.resize(size);
+    _intensityProbabilities.resize(size);
 
     for (int i = 0; i < size; ++i)
-        _pixelValueCount[i] = 0;
+        _intensityProbabilities[i] = 0;
 }
 void GrayscaleHistogram::update(const GrayscaleImage &grayImg)
 {
     int width = grayImg.width();
     int height = grayImg.height();
+    double pixelCount = width * height;
+    int intensityCount = pow(2, grayImg.channelByteSize() * 8);
 
-    reset(pow(2, grayImg.channelByteSize() * 8));
+    reset(intensityCount);
 
     for (int y = 0; y < height; ++y)
         for (int x = 0; x < width; ++x)
-            ++_pixelValueCount[grayImg.getIntensityAt(x, y)];
+            ++_intensityProbabilities[grayImg.getIntensityAt(x, y)];
+
+    for (int i = 0; i < intensityCount; ++i)
+        _intensityProbabilities[i] = _intensityProbabilities[i] / pixelCount;
 }
 
 }
