@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 
+#define INTENSITY_VALUE_COUNT   256
+
 namespace Graphics
 {
 
@@ -11,12 +13,13 @@ class GrayscaleImage;
 
 class MatchingFunction
 {
-private:
+protected:
 
-    std::vector<unsigned long> _valueMatchs;
+    std::vector<unsigned long> _intensityMatchings;
 
 public:
 
+    MatchingFunction();
     MatchingFunction(const std::string &path);
 
     GrayscaleImage* apply(GrayscaleImage* image);

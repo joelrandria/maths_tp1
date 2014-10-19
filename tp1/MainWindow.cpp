@@ -8,6 +8,8 @@
 #include "Graphics/GrayscaleImage.h"
 #include "Graphics/GrayscaleHistogram.h"
 #include "Graphics/MatchingFunction.h"
+#include "Graphics/NegatingMatchingFunction.h"
+#include "Graphics/CroppingMatchingFunction.h"
 #include "Graphics/GrayscaleCumulativeHistogram.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -78,25 +80,28 @@ void MainWindow::on_actionSaveHistogram_triggered()
 }
 void MainWindow::on_actionLoadHistogram_triggered()
 {
-    QFileDialog fd(this, tr("Charger un histogramme"));
-    fd.setFileMode(QFileDialog::ExistingFile);
+//    QFileDialog fd(this, tr("Charger un histogramme"));
+//    fd.setFileMode(QFileDialog::ExistingFile);
 
-    if (fd.exec())
-    {
-        Graphics::GrayscaleHistogram histogram(fd.selectedFiles().first().toUtf8().data());
-    }
+//    if (fd.exec())
+//    {
+//        Graphics::GrayscaleHistogram histogram(fd.selectedFiles().first().toUtf8().data());
+//    }
 }
 
-void MainWindow::on_actionApplyMatchingFunction_triggered()
+void MainWindow::on_actionApplyNegatingMatchingFunction_triggered()
 {
-    QFileDialog fd(this, tr("Sélectionner une fonction de correspondance"));
-    fd.setFileMode(QFileDialog::ExistingFile);
+    if (_pImage == 0)
+        return;
 
-    if (fd.exec())
-    {
-        Graphics::MatchingFunction matchFunc(fd.selectedFiles().first().toUtf8().data());
-        setImage(matchFunc.apply(_pImage));
-    }
+    setImage(Graphics::NegatingMatchingFunction().apply(_pImage));
+}
+void MainWindow::on_actionApplyCroppingMatchingFunction_triggered()
+{
+    if (_pImage == 0)
+        return;
+
+    setImage(Graphics::CroppingMatchingFunction(_pImage).apply(_pImage));
 }
 
 void MainWindow::on_actionSaveCumulativeHistogram_triggered()

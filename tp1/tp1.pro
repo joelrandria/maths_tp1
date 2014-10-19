@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     Graphics/GrayscaleHistogram.cpp \
     Graphics/GrayscaleImageFactory.cpp \
     Graphics/MatchingFunction.cpp \
-    Graphics/GrayscaleCumulativeHistogram.cpp
+    Graphics/GrayscaleCumulativeHistogram.cpp \
+    Graphics/NegatingMatchingFunction.cpp \
+    Graphics/CroppingMatchingFunction.cpp
 
 HEADERS  += MainWindow.h \
     Graphics/GrayscaleImage.h \
@@ -27,6 +29,8 @@ HEADERS  += MainWindow.h \
     Graphics/GrayscaleHistogram.h \
     Graphics/GrayscaleImageFactory.h \
     Graphics/MatchingFunction.h \
-    Graphics/GrayscaleCumulativeHistogram.h
+    Graphics/GrayscaleCumulativeHistogram.h \
+    Graphics/NegatingMatchingFunction.h \
+    Graphics/CroppingMatchingFunction.h
 
 FORMS    += MainWindow.ui
